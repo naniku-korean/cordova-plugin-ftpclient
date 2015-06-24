@@ -36,6 +36,7 @@ cordova plugin ftpclient
         - '104' = Failed to obtain remote certificate.
         - '300' = asynch op in progress
         - '301' = login failure.
+		
 	> Quick Example
 	
 		ftpclient.connect(success, failure, "112.169.59.106", "*****", "*****", true);
