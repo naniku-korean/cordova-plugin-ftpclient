@@ -12,24 +12,18 @@ public class ftpClient extends CordovaPlugin {
 
     private static final String TAG = "FtpClient";
     private CkFtp2 ftp = new CkFtp2();
-    private String host;
-    private String user;
-    private String password;
-    private boolean restartNext;
 
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
         PluginResult.Status status = PluginResult.Status.OK;
 
         try {
-            if (action.equals("connect")) {
-                this.host = data.getString(0);
-                this.user = data.getString(1);
-                this.password = data.getString(2);
-                this.restartNext = data.getBoolean(3);
-
+            if (action.equals("keySetting")) {
+                // Licence 등록
+                keySetting(data.getString(0));
+            } else if (action.equals("connect")) {
+                // FTP 서버 접속
                 connect(data.getString(0), data.getString(1), data.getString(2), data.getBoolean(3), callbackContext);
-
             } else if (action.equals("asyncPutFile")) {
                 // FTP 파일 전송
                 asyncPutFile(data.getString(0), data.getString(1), callbackContext);
@@ -52,6 +46,22 @@ public class ftpClient extends CordovaPlugin {
 
         return true;
     }
+
+    public void keySetting(String key){
+        boolean success;
+
+        if( key != null ){
+            //  Any string unlocks the component for the 1st 30-days.
+            key = "Anything for 30-day trial";
+        }
+        success = ftp.UnlockComponent(key);
+        if (success != true) {
+            callbackContext.error(String.valueOf(success));
+        } else {
+            callbackContext.success(String.valueOf(success));
+        }
+    }
+
     /**
     * host : 호스트 주소
     * user : 사용자 아이디
@@ -60,13 +70,6 @@ public class ftpClient extends CordovaPlugin {
     */
     public void connect(String host, String user, String password, boolean restartNext, CallbackContext callbackContext){
         boolean success;
-
-        //  Any string unlocks the component for the 1st 30-days.
-        success = ftp.UnlockComponent("Anything for 30-day trial");
-        if (success != true) {
-            Log.i(TAG, ftp.lastErrorText());
-            return;
-        }
 
         ftp.put_Hostname(host);
         ftp.put_Username(user);
