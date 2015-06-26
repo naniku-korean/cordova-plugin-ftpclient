@@ -20,7 +20,7 @@ public class ftpClient extends CordovaPlugin {
         try {
             if (action.equals("keySetting")) {
                 // Licence 등록
-                keySetting(data.getString(0));
+                keySetting(data.getString(0), callbackContext);
             } else if (action.equals("connect")) {
                 // FTP 서버 접속
                 connect(data.getString(0), data.getString(1), data.getString(2), data.getBoolean(3), callbackContext);
@@ -39,6 +39,9 @@ public class ftpClient extends CordovaPlugin {
             } else if (action.equals("deleteRemoteFile")) {
                 // FTP 서버 파일 삭제
                 deleteRemoteFile(data.getString(0), callbackContext);
+            } else if (action.equals("disconnect")){
+                // FTP 서버 접속 연결 해제
+                disconnect();
             }
         } catch (JSONException e) {
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
@@ -47,7 +50,7 @@ public class ftpClient extends CordovaPlugin {
         return true;
     }
 
-    public void keySetting(String key){
+    public void keySetting(String key, CallbackContext callbackContext){
         boolean success;
 
         if( key != null ){
@@ -74,8 +77,10 @@ public class ftpClient extends CordovaPlugin {
         ftp.put_Hostname(host);
         ftp.put_Username(user);
         ftp.put_Password(password);
+        ftp.put_ConnectTimeout(20);
 
         success = ftp.Connect();
+
         int failReason = ftp.get_ConnectFailReason();
         //  The possible failure reasons are:
         //  0 = success
@@ -105,6 +110,12 @@ public class ftpClient extends CordovaPlugin {
         }
     }
 
+
+    public void disconnect() {
+        ftp.Disconnect();
+        Log.i(TAG, ftp.lastErrorText());
+    }
+
     public void asyncPutFile(String localFileName, String remoteFileName, final CallbackContext callbackContext){
         boolean success;
 
@@ -124,30 +135,55 @@ public class ftpClient extends CordovaPlugin {
         this.cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 try{
+                    long fileSize = 0;
+                    JSONObject result = new JSONObject();
+
                     while (ftp.get_AsyncFinished() != true) {
                         Log.i(TAG, String.valueOf(ftp.get_AsyncBytesSent()) + " bytes sent");
                         Log.i(TAG, String.valueOf(ftp.get_UploadTransferRate()) + " bytes per second");
-                        String data = "{ sendByte:"+  String.valueOf(ftp.get_AsyncBytesSent()) +
-                                      ", transferRate:"+ String.valueOf(ftp.get_UploadTransferRate()) +" }";
-                        JSONObject result = new JSONObject(data);
 
-                        PluginResult progressResult = new PluginResult(PluginResult.Status.OK, result);
-                        progressResult.setKeepCallback(true);
-                        callbackContext.sendPluginResult(progressResult);
+                        result.put("sendByte", String.valueOf(ftp.get_AsyncBytesSent()));
+                        result.put("transferRate", String.valueOf(ftp.get_UploadTransferRate()));
 
-                        //  Sleep 1 second.
-                        ftp.SleepMs(1000);
+
+                        if( ftp.get_AsyncBytesSent() > 0 && fileSize == ftp.get_AsyncBytesSent() ){
+                            result = new JSONObject();
+                            result.put("value", String.valueOf(ftp.get_AsyncSuccess()));
+                            result.put("log", ftp.asyncLog());
+                            callbackContext.error(result);
+
+                            Log.i(TAG, result.toString());
+                            ftp.Disconnect();
+                            return;
+                        } else {
+
+                            PluginResult progressResult = new PluginResult(PluginResult.Status.OK, result);
+                            progressResult.setKeepCallback(true);
+                            callbackContext.sendPluginResult(progressResult);
+
+                            fileSize = ftp.get_AsyncBytesSent();
+
+                            //  Sleep 1 second.
+                            ftp.SleepMs(1000);
+                        }
                     }
 
                     //  Did the upload succeed?
                     if (ftp.get_AsyncSuccess() == true) {
-                        callbackContext.success(String.valueOf(ftp.get_AsyncSuccess()));
+                        result = new JSONObject();
+                        result.put("value", String.valueOf(ftp.get_AsyncSuccess()));
+                        result.put("log", ftp.asyncLog());
+                        callbackContext.success(result);
+
                         Log.i(TAG, "File Uploaded!");
                     }
                     else {
                         //  The error information for asynchronous ops
                         //  is in AsyncLog as opposed to LastErrorText
-                        callbackContext.error(ftp.asyncLog());
+                        result = new JSONObject();
+                        result.put("value", String.valueOf(ftp.get_AsyncSuccess()));
+                        result.put("log", ftp.asyncLog());
+                        callbackContext.error(result);
                         Log.i(TAG, ftp.asyncLog());
                     }
                 } catch (JSONException e){

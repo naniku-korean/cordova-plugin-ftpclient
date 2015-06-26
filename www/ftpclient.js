@@ -32,5 +32,15 @@ module.exports = {
     deleteRemoteFile: function(successCallback, errorCallback, remoteFileName){
         var arg = [ remoteFileName ];
         cordova.exec(successCallback, errorCallback, "ftpClient", "deleteRemoteFile", arg);
+    },
+
+    keySetting: function(successCallback, errorCallback, key){
+        var arg = [ key ];
+        cordova.exec(successCallback, errorCallback, "ftpClient", "keySetting", arg);
+    },
+
+    disconnect: function(successCallback, errorCallback){
+        var arg = [];
+        cordova.exec(successCallback, errorCallback, "ftpClient", "disconnect", arg);
     }
 };

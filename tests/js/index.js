@@ -65,16 +65,16 @@ $('button').on('click', function(e){
 
     switch( id ){
         case "con":
-            ftpclient.connect(success, failure, "112.169.59.106", "naniku", "naniku", true);
+            ftpclient.connect(success, failure, "183.111.29.3", "admin", "@qltkdgkfkekqlscl", true);
             break;
         case "put":
-            ftpclient.asyncPutFile(success, failure, "../storage/emulated/0/DCIM/Camera/20150617_141616.mp4", "test.mp4");
+            ftpclient.asyncPutFile(success, failure, "../storage/emulated/0/DCIM/Camera/20150626_113653.mp4", "test.mp4");
             break;
         case "size":
             ftpclient.getRemoteFileSize(success, failure, "test.mp4");
             break;
         case "change":
-            ftpclient.changeRemoteDir(success, failure, "dan");
+            ftpclient.changeRemoteDir(success, failure, "davinci");
             break;
         case "create":
             ftpclient.createRemoteDir(success, failure, "niku");

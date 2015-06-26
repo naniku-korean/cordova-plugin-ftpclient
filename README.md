@@ -43,8 +43,8 @@ cordova plugin ftpclient
 
 - __asyncPutFile__: FTP 서버로 파일 전송 `ftpclient.asyncPutFile(success, failure, localFile, remoteFileName);`
 	-  전송 중인 경우: 'sendByte(전송량), transferRate(전송률)' <type:object>
-	-  전송 완료 경우: 'true'
-	-  전송 실패 경우: 'false'
+	-  전송 완료 경우: 'value:true, log' <type:object>
+	-  전송 실패 경우: 'value:false, log' <type:object>
 	> Quick Example
 	
 		 ftpclient.asyncPutFile(success, failure, "../storage/emulated/0/DCIM/Camera/20150617_141616.mp4", "test.mp4");
@@ -52,6 +52,7 @@ cordova plugin ftpclient
 - __getRemoteFileSize__: FTP 서버 파일 크기`ftpclient.getRemoteFileSize(success, failure, remoteFileName);`
 	-	파일이 있는 경우: '00000000' <byte 단위>
 	-	파일이 없는 경우: '-1'
+
 	> Quick Example
 	
 		 ftpclient.getRemoteFileSize(success, failure, "test.mp4");
@@ -59,6 +60,7 @@ cordova plugin ftpclient
 - __changeRemoteDir__: FTP 서버 폴더 이동 `ftpclient.changeRemoteDir(success, failure, remoteDir);` 
 	-	폴더가 있는 경우:  'true'
 	-	폴더가 없는 경우:  'faslse'
+
 	> Quick Example
 	
 		 ftpclient.changeRemoteDir(success, failure, "0000");
@@ -66,6 +68,7 @@ cordova plugin ftpclient
 - __createRemoteDir__: FTP 서버 폴더 생성 `ftpclient.createRemoteDir(success, failure, remoteDir);`
 	-	폴더 생성: 'true'
 	-	폴더가 생성되지 않으면: 'false'
+
 	> Quick Example
 	
 		 ftpclient.createRemoteDir(success, failure, "niku");
@@ -73,6 +76,7 @@ cordova plugin ftpclient
 - __deleteRemoteFile__: FTP 서버 파일 삭제 `ftpclient.deleteRemoteFile(success, failure, remoteFileName);`
 	-	파일이 삭제된 경우: 'true'
 	-	파일이 없어 삭제가 불가한 경우 : 'false'
+
 	> Quick Example
 	
 		 ftpclient.deleteRemoteFile(success, failure, "config.xml");
