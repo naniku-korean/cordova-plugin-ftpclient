@@ -1,6 +1,11 @@
 # cordova-plugin-ftpclient
 cordova plugin ftpclient
 
+##참고 사항
+
+WIFI 전송 중 WIFI 해제 후 데이터 네트워크(3G, LTE)로 전환 시 FTP 접속이 완전히 해제 되지 않고
+일정 시간 이후 재접속이 가능하다.( timeout이 발생함 )
+
 ##FTP Client 
 	
 	window.ftpclient   //cordova interface ftp object
