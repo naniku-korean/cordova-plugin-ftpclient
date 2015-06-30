@@ -42,5 +42,10 @@ module.exports = {
     disconnect: function(successCallback, errorCallback){
         var arg = [];
         cordova.exec(successCallback, errorCallback, "ftpClient", "disconnect", arg);
+    },
+
+    getPathFromMediaUri: function(successCallback, errorCallback, data){
+        var arg = [data];
+        cordova.exec(successCallback, errorCallback, "ftpClient", "getPathFromMediaUri", arg);
     }
 };

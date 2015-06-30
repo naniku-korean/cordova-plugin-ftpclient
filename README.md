@@ -86,6 +86,21 @@ WIFI 전송 중 WIFI 해제 후 데이터 네트워크(3G, LTE)로 전환 시 FT
 	
 		 ftpclient.deleteRemoteFile(success, failure, "config.xml");
 
+- __disconnect__: FTP 서버 접속 해제 `ftpclient.disconnect(success, failure);`
+
+	> Quick Example
+
+		 ftpclient.disconnect(success, failure);
+
+- __getPathFromMediaUri__: 파일 실제 경로 가져오기 `ftpclient.getPathFromMediaUri(success, failure, data);`
+	-   파일 경로를 성공적으로 가져온 경우: 실제 파일 경로( type:string )
+
+
+	> Quick Example
+
+		 ftpclient.getPathFromMediaUri(success, failure, fakeFilePath);
+
+
 ## Installation
 
     cordova plugin add https://github.com/naniku-korean/cordova-plugin-ftpclient

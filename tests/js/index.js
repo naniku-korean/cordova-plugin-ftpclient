@@ -51,36 +51,82 @@ var app = {
 
 app.initialize();
 
-$('button').on('click', function(e){
-    var id = e.target.id;
-    var $target = $(e.target);
-    var success = function(message) {
-        console.log(message);
+// type -> video, image
+var fileTransfer = function( type ){
+    var $log = $('#log');
+    var success = function(data) {
+        var text = $log.text();
+        $log.text(text+JSON.stringify(data)+"\n");
     };
 
     var failure = function(message) {
         console.log(message);
         console.log("Error calling Hello Plugin");
+        var text = $log.text();
+
+        $log.text(text+JSON.stringify(message)+"\n")
     };
+
+    ftpclient.keySetting(undefined, undefined, "");
+    ftpclient.connect(success, failure, "183.111.29.3", "admin", "@qltkdgkfkekqlscl", true);
+    ftpclient.changeRemoteDir(success, failure, "davinci");
+    var data;
+    if( type === 'video' ){
+        data = $('#video').attr('src');
+    } else {
+        data = $('#img').attr('src');
+    }
+
+    data = ".."+data;
+    if( data !== undefined ){
+        ftpclient.asyncPutFile(success, failure, data, "test.mp4");
+    }
+};
+
+var getMediaData = function( type ){
+    var pictureOpt = {
+        destinationType: Camera.DestinationType.FILE_URI,
+        quality : 50,
+        sourceType : Camera.PictureSourceType.PHOTOLIBRARY,
+        mediaType: (type === 'video')? Camera.MediaType.VIDEO : Camera.MediaType.PICTURE
+    };
+    function onSuccess(imageData){
+        var photo_split, reImageData;
+        if (imageData.substring(0,21)=="content://com.android") {
+            photo_split=imageData.split("%3A");
+            reImageData="content://media/external/images/media/"+photo_split[1];
+        } else {
+            reImageData = imageData;
+        }
+
+        ftpclient.getPathFromMediaUri(function(data) {
+            var text = $('#log').text();
+            $('#log').text(text+JSON.stringify(data)+"\n");
+            $('#'+type).attr('src', data);
+            fileTransfer(type);
+
+        }, function(data) {
+            var text = $('#log').text();
+            $('#log').text(text+JSON.stringify(data)+"\n");
+
+        }, reImageData);
+
+    }
+    function onError(){
+        console.log(arguments);
+    }
+    navigator.camera.getPicture(onSuccess, onError, pictureOpt);
+};
+
+$('button').on('click', function(e){
+    var id = e.target.id;
 
     switch( id ){
         case "con":
-            ftpclient.connect(success, failure, "183.111.29.3", "admin", "@qltkdgkfkekqlscl", true);
+            getMediaData('video');
             break;
-        case "put":
-            ftpclient.asyncPutFile(success, failure, "../storage/emulated/0/DCIM/Camera/20150626_113653.mp4", "test.mp4");
-            break;
-        case "size":
-            ftpclient.getRemoteFileSize(success, failure, "test.mp4");
-            break;
-        case "change":
-            ftpclient.changeRemoteDir(success, failure, "davinci");
-            break;
-        case "create":
-            ftpclient.createRemoteDir(success, failure, "niku");
-            break;
-        case "del":
-            ftpclient.deleteRemoteFile(success, failure, "config.xml");
+        case "chooser":
+            getMediaData('img');
             break;
     }
 

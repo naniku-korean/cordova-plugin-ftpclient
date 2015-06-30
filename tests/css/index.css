@@ -103,3 +103,14 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+#log{
+    position: relative;
+    width: 80%;
+    height: 200px;
+    margin: 10px;
+    overflow: scroll;
+    word-wrap: break-word;
+    background-color: antiquewhite;
+
+}

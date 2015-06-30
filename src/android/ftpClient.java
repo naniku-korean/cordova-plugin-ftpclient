@@ -6,6 +6,10 @@ import org.apache.cordova.*;
 import org.json.JSONObject;
 import org.json.JSONArray;
 import org.json.JSONException;
+import android.provider.MediaStore;
+import android.content.CursorLoader;
+import android.database.Cursor;
+import android.net.Uri;
 import android.util.Log;
 
 public class ftpClient extends CordovaPlugin {
@@ -42,7 +46,10 @@ public class ftpClient extends CordovaPlugin {
             } else if (action.equals("disconnect")){
                 // FTP 서버 접속 연결 해제
                 disconnect();
+            } else if(action.equals("getPathFromMediaUri")){
+                getPathFromMediaUri(data.getString(0), callbackContext);
             }
+
         } catch (JSONException e) {
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.JSON_EXCEPTION));
         }
@@ -239,6 +246,27 @@ public class ftpClient extends CordovaPlugin {
             Log.i(TAG, ftp.lastErrorText());
         }
     }
+
+    public void getPathFromMediaUri(String url, CallbackContext callbackContext) {
+        String result = null;
+        Uri uri = Uri.parse(url);
+
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = this.cordova.getActivity().getContentResolver().query(uri, projection, null, null, null);
+        int col = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
+        if (col >= 0 && cursor.moveToFirst())
+            result = cursor.getString(col);
+        cursor.close();
+
+        if( result != null ){
+            callbackContext.success(result);
+            Log.i(TAG, "format File!");
+        } else {
+            callbackContext.error(result);
+            Log.i(TAG, ftp.lastErrorText());
+        }
+    }
+
 
     static {
     	      // Important: Make sure the name passed to loadLibrary matches the shared library

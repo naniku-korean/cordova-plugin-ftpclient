@@ -47,12 +47,16 @@
                     <p class="event received">Device is Ready</p>
                 </div>
             </div>
-            <button id="con" data-role="button"> Connect </button>
-            <button id="put" data-role="button"> AsyncPutFile </button>
-            <button id="size" data-role="button"> getRemoteFileSize </button>
-            <button id="change" data-role="button"> changeRemoteDir </button>
-            <button id="create" data-role="button"> createRemoteDir </button>
-            <button id="del" data-role="button"> deleteRemoteFile </button>
+            <button id="con" data-role="button"> 동영상 전송 </button>
+            <!--<button id="put" data-role="button"> 파일전송 </button>-->
+            <!--<button id="size" data-role="button"> getRemoteFileSize </button>-->
+            <!--<button id="change" data-role="button"> changeRemoteDir </button>-->
+            <!--<button id="del" data-role="button"> deleteRemoteFile </button>-->
+            <button id="chooser" data-role="button"> 이미지 전송 </button>
+            <img width="100px" height="100px" controls style="position:relative;" id="img"/>
+            <video width="380px" height="150px" style="position:relative;" id="video"></video>
+            <div id="log">
+            </div>
         </div>
 
         <script type="text/javascript" src="cordova.js"></script>
