@@ -52,7 +52,7 @@ var app = {
 app.initialize();
 
 // type -> video, image
-var fileTransfer = function( datas ){
+var fileTransfer = function( host, id, pw, changeFolder, datas ){
     var $log = $('#log');
     var index = 0;
     var success = function(data) {
@@ -81,8 +81,8 @@ var fileTransfer = function( datas ){
     };
 
     ftpclient.keySetting(undefined, undefined, "");
-    ftpclient.connect(success, failure, "183.111.29.3", "admin", "@qltkdgkfkekqlscl", true);
-    ftpclient.changeRemoteDir(success, failure, "davinci");
+    ftpclient.connect(success, failure, host, id, pw, true);
+    ftpclient.changeRemoteDir(success, failure, changeFolder);
 
     if( datas[0] !== undefined ){
         var filename = datas[0].substr(datas[0].lastIndexOf('/')+1);
@@ -118,7 +118,7 @@ var getMediaData = function(type){
             }
             listdata.push(data);
             var filename = data.substr(data.lastIndexOf('/')+1);
-            $('#collapse').find('ul').append('<li><a herf="#">'+filename+'</a></li>');
+            $('#collapse').find('ul').append('<li><a herf="#">'+ filename +'</a></li>');
 
             // set list data
             $("#collapse").find('ul').listview('option', 'data', listdata);
@@ -130,9 +130,7 @@ var getMediaData = function(type){
     function onError(){
         console.log(arguments);
     }
-
     navigator.camera.getPicture(onSuccess, onError, pictureOpt);
-
 };
 
 $('#select_v').on('click', function(e){
@@ -147,7 +145,6 @@ $('#select_i').on('click', function(e){
 
 $('#send').on('click', function(e){
     var datas = $("#collapse").find('ul').listview('option', 'data');
-    fileTransfer(datas);
-    $('#log').scrollTop($('#log')[0].scrollHeight);
+    fileTransfer(host, id, pw, changeFolder, datas);
     return false;
 });

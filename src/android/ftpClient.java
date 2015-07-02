@@ -47,6 +47,7 @@ public class ftpClient extends CordovaPlugin {
                 // FTP 서버 접속 연결 해제
                 disconnect();
             } else if(action.equals("getPathFromMediaUri")){
+                // 실제 파일 경로 가져오기
                 getPathFromMediaUri(data.getString(0), callbackContext);
             }
 
