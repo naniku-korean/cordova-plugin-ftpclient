@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
+        id="ftp_client"
+        version="0.0.1">
+
+  <name>FtpClient</name>
+
+  <engines>
+    <engine name="cordova" version=">=3.4.0"/>
+  </engines>
+
+  <asset src="www/ftpclient.js" target="js/ftpclient.js"/>
+
+
+
+  <platform name="android">
+
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="ftpClient">
+        <param name="android-package" value="com.nnk.ftpClient"/>
+      </feature>
+    </config-file>ad
+      <source-file src="src/android/libs" target-dir="./"/>
+      <source-file src="src/android/chilkatsoft/" target-dir="src/com"/>
+      <source-file src="src/android/ftpClient.java" target-dir="src/com/nnk"/>
+
+      <js-module src="www/ftpclient.js" name="ftpclient">
+          <clobbers target="ftpclient" />
+          <runs />
+      </js-module>
+  </platform>
+</plugin>
