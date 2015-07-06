@@ -19,8 +19,8 @@
       <feature name="ftpClient">
         <param name="android-package" value="com.nnk.ftpClient"/>
       </feature>
-    </config-file>ad
-      <source-file src="src/android/libs" target-dir="libs"/>
+    </config-file>
+      <source-file src="src/android/libs/" target-dir="../android"/>
       <source-file src="src/android/chilkatsoft/" target-dir="src/com"/>
       <source-file src="src/android/ftpClient.java" target-dir="src/com/nnk"/>
 
