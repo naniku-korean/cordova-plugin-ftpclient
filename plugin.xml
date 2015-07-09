@@ -10,8 +10,10 @@
   </engines>
 
   <asset src="www/ftpclient.js" target="js/ftpclient.js"/>
-
-
+  
+  <js-module src="www/ftpclient.js" name="ftpclient">
+      <clobbers target="ftpclient" />
+  </js-module>
 
   <platform name="android">
 
@@ -24,9 +26,20 @@
       <source-file src="src/android/chilkatsoft/" target-dir="src/com"/>
       <source-file src="src/android/ftpClient.java" target-dir="src/com/nnk"/>
 
-      <js-module src="www/ftpclient.js" name="ftpclient">
-          <clobbers target="ftpclient" />
-          <runs />
-      </js-module>
+        </platform>
+  
+  <platform name="ios">
+      
+      <config-file target="config.xml" parent="/widget">
+          <feature name="ftpClient">
+              <param name="ios-package" value="FTPClient" />
+          </feature>
+      </config-file>
+      <header-file src="src/ios/include"/>
+      <header-file src="src/ios/FTPClient.h"/>
+      <source-file src="src/ios/FTPClient.m"/>
+      <source-file src="src/ios/libchilkatIos.a" framework="true"/>
+      <framework src="libc++.dylib" />
+      <framework src="libresolv.9.dylib" />
   </platform>
 </plugin>

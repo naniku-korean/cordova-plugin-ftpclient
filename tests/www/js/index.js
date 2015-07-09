@@ -65,7 +65,10 @@ var fileTransfer = function( host, id, pw, changeFolder, datas ){
                 data = datas[index];
                 var filename = data.substr(data.lastIndexOf('/')+1);
                 if( data !== undefined ){
-                    ftpclient.asyncPutFile(success, failure, data, encodeURIComponent(filename));
+                	//if ios
+                	setTimeout( function (){
+                    	ftpclient.asyncPutFile(success, failure, data, encodeURIComponent(filename));                	
+                	}, 0);
                     index += 1;
                 }
             }
@@ -109,23 +112,40 @@ var getMediaData = function(type){
         } else {
             rename = data;
         }
-
-        ftpclient.getPathFromMediaUri(function(data) {
+        // to ios
+        if(cordova.platformId.toLowerCase() == "ios"){
             var listdata = $("#collapse").find('ul').listview('option', 'data');
-
+            
             if( listdata === null ) {
                 listdata = [];
             }
+            data = data.replace("file://", "");
             listdata.push(data);
             var filename = data.substr(data.lastIndexOf('/')+1);
             $('#collapse').find('ul').append('<li><a herf="#">'+ filename +'</a></li>');
-
+            
             // set list data
             $("#collapse").find('ul').listview('option', 'data', listdata);
+            //to android
+        } else if( cordova.platformId.toLowerCase() == "android" ){
+            ftpclient.getPathFromMediaUri(function(data) {
+                var listdata = $("#collapse").find('ul').listview('option', 'data');
+            
+                if( listdata === null ) {
+                    listdata = [];
+                }
+                listdata.push(data);
+                var filename = data.substr(data.lastIndexOf('/')+1);
+                $('#collapse').find('ul').append('<li><a herf="#">'+ filename +'</a></li>');
+            
+                // set list data
+                $("#collapse").find('ul').listview('option', 'data', listdata);
+    
+            }, function(data) {
+                alert(JSON.stringify(data));
+            }, rename);
+        }
 
-        }, function(data) {
-            alert(JSON.stringify(data));
-        }, rename);
     }
     function onError(){
         console.log(arguments);
@@ -145,6 +165,6 @@ $('#select_i').on('click', function(e){
 
 $('#send').on('click', function(e){
     var datas = $("#collapse").find('ul').listview('option', 'data');
-    fileTransfer(host, id, pw, changeFolder, datas);
+    fileTransfer(host, user, password, changeDir, datas);
     return false;
 });
