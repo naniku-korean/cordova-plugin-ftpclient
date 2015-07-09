@@ -6,6 +6,8 @@ cordova plugin ftpclient
 WIFI 전송 중 WIFI 해제 후 데이터 네트워크(3G, LTE)로 전환 시 FTP 접속이 완전히 해제 되지 않고
 일정 시간 이후 재접속이 가능하다.( timeout이 발생함 )
 
+iOS 사용 시 libchilkatIos.zip 파일을 반드시 압축 해제를 해야만 사용 가능하다.
+
 ##FTP Client 
 	
 	window.ftpclient   //cordova interface ftp object
