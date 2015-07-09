@@ -94,6 +94,7 @@ iOS 사용 시 libchilkatIos.zip 파일을 반드시 압축 해제를 해야만 
 
 		 ftpclient.disconnect(success, failure);
 
+#### not support iOS
 - __getPathFromMediaUri__: 파일 실제 경로 가져오기 `ftpclient.getPathFromMediaUri(success, failure, data);`
 	-   파일 경로를 성공적으로 가져온 경우: 실제 파일 경로( type:string )
 
