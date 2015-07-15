@@ -143,6 +143,14 @@ public class CkFtp2 {
     chilkatJNI.CkFtp2_put_AllocateSize(swigCPtr, this, newVal);
   }
 
+  public boolean get_AllowMlsd() {
+    return chilkatJNI.CkFtp2_get_AllowMlsd(swigCPtr, this);
+  }
+
+  public void put_AllowMlsd(boolean newVal) {
+    chilkatJNI.CkFtp2_put_AllowMlsd(swigCPtr, this, newVal);
+  }
+
   public long get_AsyncBytesReceived() {
     return chilkatJNI.CkFtp2_get_AsyncBytesReceived(swigCPtr, this);
   }
@@ -225,6 +233,14 @@ public class CkFtp2 {
 
   public void put_AutoGetSizeForProgress(boolean newVal) {
     chilkatJNI.CkFtp2_put_AutoGetSizeForProgress(swigCPtr, this, newVal);
+  }
+
+  public boolean get_AutoOptsUtf8() {
+    return chilkatJNI.CkFtp2_get_AutoOptsUtf8(swigCPtr, this);
+  }
+
+  public void put_AutoOptsUtf8(boolean newVal) {
+    chilkatJNI.CkFtp2_put_AutoOptsUtf8(swigCPtr, this, newVal);
   }
 
   public boolean get_AutoSetUseEpsv() {
@@ -523,6 +539,14 @@ public class CkFtp2 {
     chilkatJNI.CkFtp2_put_Password(swigCPtr, this, newVal);
   }
 
+  public int get_PercentDoneScale() {
+    return chilkatJNI.CkFtp2_get_PercentDoneScale(swigCPtr, this);
+  }
+
+  public void put_PercentDoneScale(int newVal) {
+    chilkatJNI.CkFtp2_put_PercentDoneScale(swigCPtr, this, newVal);
+  }
+
   public int get_Port() {
     return chilkatJNI.CkFtp2_get_Port(swigCPtr, this);
   }
@@ -731,6 +755,18 @@ public class CkFtp2 {
     chilkatJNI.CkFtp2_put_Ssl(swigCPtr, this, newVal);
   }
 
+  public void get_SslAllowedCiphers(CkString str) {
+    chilkatJNI.CkFtp2_get_SslAllowedCiphers(swigCPtr, this, CkString.getCPtr(str), str);
+  }
+
+  public String sslAllowedCiphers() {
+    return chilkatJNI.CkFtp2_sslAllowedCiphers(swigCPtr, this);
+  }
+
+  public void put_SslAllowedCiphers(String newVal) {
+    chilkatJNI.CkFtp2_put_SslAllowedCiphers(swigCPtr, this, newVal);
+  }
+
   public void get_SslProtocol(CkString str) {
     chilkatJNI.CkFtp2_get_SslProtocol(swigCPtr, this, CkString.getCPtr(str), str);
   }
@@ -779,6 +815,22 @@ public class CkFtp2 {
     return chilkatJNI.CkFtp2_syncPreview(swigCPtr, this);
   }
 
+  public void get_TlsCipherSuite(CkString str) {
+    chilkatJNI.CkFtp2_get_TlsCipherSuite(swigCPtr, this, CkString.getCPtr(str), str);
+  }
+
+  public String tlsCipherSuite() {
+    return chilkatJNI.CkFtp2_tlsCipherSuite(swigCPtr, this);
+  }
+
+  public void get_TlsVersion(CkString str) {
+    chilkatJNI.CkFtp2_get_TlsVersion(swigCPtr, this, CkString.getCPtr(str), str);
+  }
+
+  public String tlsVersion() {
+    return chilkatJNI.CkFtp2_tlsVersion(swigCPtr, this);
+  }
+
   public int get_UploadTransferRate() {
     return chilkatJNI.CkFtp2_get_UploadTransferRate(swigCPtr, this);
   }
@@ -803,48 +855,16 @@ public class CkFtp2 {
     chilkatJNI.CkFtp2_put_Username(swigCPtr, this, newVal);
   }
 
-  public boolean get_AutoOptsUtf8() {
-    return chilkatJNI.CkFtp2_get_AutoOptsUtf8(swigCPtr, this);
+  public void get_SyncedFiles(CkString str) {
+    chilkatJNI.CkFtp2_get_SyncedFiles(swigCPtr, this, CkString.getCPtr(str), str);
   }
 
-  public void put_AutoOptsUtf8(boolean newVal) {
-    chilkatJNI.CkFtp2_put_AutoOptsUtf8(swigCPtr, this, newVal);
+  public String syncedFiles() {
+    return chilkatJNI.CkFtp2_syncedFiles(swigCPtr, this);
   }
 
-  public void get_SslAllowedCiphers(CkString str) {
-    chilkatJNI.CkFtp2_get_SslAllowedCiphers(swigCPtr, this, CkString.getCPtr(str), str);
-  }
-
-  public String sslAllowedCiphers() {
-    return chilkatJNI.CkFtp2_sslAllowedCiphers(swigCPtr, this);
-  }
-
-  public void put_SslAllowedCiphers(String newVal) {
-    chilkatJNI.CkFtp2_put_SslAllowedCiphers(swigCPtr, this, newVal);
-  }
-
-  public int get_PercentDoneScale() {
-    return chilkatJNI.CkFtp2_get_PercentDoneScale(swigCPtr, this);
-  }
-
-  public void put_PercentDoneScale(int newVal) {
-    chilkatJNI.CkFtp2_put_PercentDoneScale(swigCPtr, this, newVal);
-  }
-
-  public void get_TlsVersion(CkString str) {
-    chilkatJNI.CkFtp2_get_TlsVersion(swigCPtr, this, CkString.getCPtr(str), str);
-  }
-
-  public String tlsVersion() {
-    return chilkatJNI.CkFtp2_tlsVersion(swigCPtr, this);
-  }
-
-  public void get_TlsCipherSuite(CkString str) {
-    chilkatJNI.CkFtp2_get_TlsCipherSuite(swigCPtr, this, CkString.getCPtr(str), str);
-  }
-
-  public String tlsCipherSuite() {
-    return chilkatJNI.CkFtp2_tlsCipherSuite(swigCPtr, this);
+  public void put_SyncedFiles(String newVal) {
+    chilkatJNI.CkFtp2_put_SyncedFiles(swigCPtr, this, newVal);
   }
 
   public boolean AppendFile(String localFilename, String remoteFilename) {
@@ -1045,6 +1065,18 @@ public class CkFtp2 {
     return chilkatJNI.CkFtp2_filename(swigCPtr, this, index);
   }
 
+  public boolean GetGroup(int index, CkString outStr) {
+    return chilkatJNI.CkFtp2_GetGroup(swigCPtr, this, index, CkString.getCPtr(outStr), outStr);
+  }
+
+  public String getGroup(int index) {
+    return chilkatJNI.CkFtp2_getGroup(swigCPtr, this, index);
+  }
+
+  public String group(int index) {
+    return chilkatJNI.CkFtp2_group(swigCPtr, this, index);
+  }
+
   public boolean GetIsDirectory(int index) {
     return chilkatJNI.CkFtp2_GetIsDirectory(swigCPtr, this, index);
   }
@@ -1143,6 +1175,42 @@ public class CkFtp2 {
 
   public String lastModifiedTimeStr(int index) {
     return chilkatJNI.CkFtp2_lastModifiedTimeStr(swigCPtr, this, index);
+  }
+
+  public boolean GetOwner(int index, CkString outStr) {
+    return chilkatJNI.CkFtp2_GetOwner(swigCPtr, this, index, CkString.getCPtr(outStr), outStr);
+  }
+
+  public String getOwner(int index) {
+    return chilkatJNI.CkFtp2_getOwner(swigCPtr, this, index);
+  }
+
+  public String owner(int index) {
+    return chilkatJNI.CkFtp2_owner(swigCPtr, this, index);
+  }
+
+  public boolean GetPermType(int index, CkString outStr) {
+    return chilkatJNI.CkFtp2_GetPermType(swigCPtr, this, index, CkString.getCPtr(outStr), outStr);
+  }
+
+  public String getPermType(int index) {
+    return chilkatJNI.CkFtp2_getPermType(swigCPtr, this, index);
+  }
+
+  public String permType(int index) {
+    return chilkatJNI.CkFtp2_permType(swigCPtr, this, index);
+  }
+
+  public boolean GetPermissions(int index, CkString outStr) {
+    return chilkatJNI.CkFtp2_GetPermissions(swigCPtr, this, index, CkString.getCPtr(outStr), outStr);
+  }
+
+  public String getPermissions(int index) {
+    return chilkatJNI.CkFtp2_getPermissions(swigCPtr, this, index);
+  }
+
+  public String permissions(int index) {
+    return chilkatJNI.CkFtp2_permissions(swigCPtr, this, index);
   }
 
   public boolean GetRemoteFileBinaryData(String remoteFilename, CkByteData outData) {

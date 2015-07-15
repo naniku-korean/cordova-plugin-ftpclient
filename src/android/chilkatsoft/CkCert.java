@@ -431,14 +431,14 @@ public class CkCert {
     return chilkatJNI.CkCert_exportCertXml(swigCPtr, this);
   }
 
-  public CkPrivateKey ExportPrivateKey() {
+  public SWIGTYPE_p_CkPrivateKey ExportPrivateKey() {
     long cPtr = chilkatJNI.CkCert_ExportPrivateKey(swigCPtr, this);
-    return (cPtr == 0) ? null : new CkPrivateKey(cPtr, true);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_CkPrivateKey(cPtr, true);
   }
 
-  public CkPublicKey ExportPublicKey() {
+  public SWIGTYPE_p_CkPublicKey ExportPublicKey() {
     long cPtr = chilkatJNI.CkCert_ExportPublicKey(swigCPtr, this);
-    return (cPtr == 0) ? null : new CkPublicKey(cPtr, true);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_CkPublicKey(cPtr, true);
   }
 
   public boolean ExportToPfxData(String password, boolean includeCertChain, CkByteData outBytes) {
@@ -469,6 +469,18 @@ public class CkCert {
 
   public String encoded() {
     return chilkatJNI.CkCert_encoded(swigCPtr, this);
+  }
+
+  public boolean GetExtensionAsXml(String oid, CkString outStr) {
+    return chilkatJNI.CkCert_GetExtensionAsXml(swigCPtr, this, oid, CkString.getCPtr(outStr), outStr);
+  }
+
+  public String getExtensionAsXml(String oid) {
+    return chilkatJNI.CkCert_getExtensionAsXml(swigCPtr, this, oid);
+  }
+
+  public String extensionAsXml(String oid) {
+    return chilkatJNI.CkCert_extensionAsXml(swigCPtr, this, oid);
   }
 
   public boolean GetPrivateKeyPem(CkString outStr) {
@@ -525,6 +537,10 @@ public class CkCert {
     return chilkatJNI.CkCert_LoadFromFile(swigCPtr, this, path);
   }
 
+  public boolean LoadPem(String strPem) {
+    return chilkatJNI.CkCert_LoadPem(swigCPtr, this, strPem);
+  }
+
   public boolean LoadPfxData(CkByteData pfxData, String password) {
     return chilkatJNI.CkCert_LoadPfxData(swigCPtr, this, CkByteData.getCPtr(pfxData), pfxData, password);
   }
@@ -549,8 +565,8 @@ public class CkCert {
     return chilkatJNI.CkCert_SetFromEncoded(swigCPtr, this, encodedCert);
   }
 
-  public boolean SetPrivateKey(CkPrivateKey privKey) {
-    return chilkatJNI.CkCert_SetPrivateKey(swigCPtr, this, CkPrivateKey.getCPtr(privKey), privKey);
+  public boolean SetPrivateKey(SWIGTYPE_p_CkPrivateKey privKey) {
+    return chilkatJNI.CkCert_SetPrivateKey(swigCPtr, this, SWIGTYPE_p_CkPrivateKey.getCPtr(privKey));
   }
 
   public boolean SetPrivateKeyPem(String privKeyPem) {
@@ -563,22 +579,6 @@ public class CkCert {
 
   public boolean VerifySignature() {
     return chilkatJNI.CkCert_VerifySignature(swigCPtr, this);
-  }
-
-  public boolean GetExtensionAsXml(String oid, CkString outStr) {
-    return chilkatJNI.CkCert_GetExtensionAsXml(swigCPtr, this, oid, CkString.getCPtr(outStr), outStr);
-  }
-
-  public String getExtensionAsXml(String oid) {
-    return chilkatJNI.CkCert_getExtensionAsXml(swigCPtr, this, oid);
-  }
-
-  public String extensionAsXml(String oid) {
-    return chilkatJNI.CkCert_extensionAsXml(swigCPtr, this, oid);
-  }
-
-  public boolean LoadPem(String strPem) {
-    return chilkatJNI.CkCert_LoadPem(swigCPtr, this, strPem);
   }
 
 }

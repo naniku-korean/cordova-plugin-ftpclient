@@ -127,8 +127,8 @@ public class CkTrustedRoots {
     return chilkatJNI.CkTrustedRoots_AddCert(swigCPtr, this, CkCert.getCPtr(cert), cert);
   }
 
-  public boolean AddJavaKeyStore(CkJavaKeyStore keystore) {
-    return chilkatJNI.CkTrustedRoots_AddJavaKeyStore(swigCPtr, this, CkJavaKeyStore.getCPtr(keystore), keystore);
+  public boolean AddJavaKeyStore(SWIGTYPE_p_CkJavaKeyStore keystore) {
+    return chilkatJNI.CkTrustedRoots_AddJavaKeyStore(swigCPtr, this, SWIGTYPE_p_CkJavaKeyStore.getCPtr(keystore));
   }
 
   public boolean Deactivate() {

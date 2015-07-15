@@ -276,7 +276,7 @@ public class ftpClient extends CordovaPlugin {
     	      //  for "libchilkatemail.so", pass "chilkatemail" to loadLibrary
     	      //  etc.
     	      //
-    	      System.loadLibrary("chilkat");
+    	      System.loadLibrary("chilkatftp");
 
     	      // Note: If the incorrect library name is passed to System.loadLibrary,
     	      // then you will see the following error message at application startup:

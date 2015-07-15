@@ -147,8 +147,8 @@ public class CkXmlCertVault {
     return chilkatJNI.CkXmlCertVault_AddPemFile(swigCPtr, this, path, password);
   }
 
-  public boolean AddPfx(CkPfx pfx) {
-    return chilkatJNI.CkXmlCertVault_AddPfx(swigCPtr, this, CkPfx.getCPtr(pfx), pfx);
+  public boolean AddPfx(SWIGTYPE_p_CkPfx pfx) {
+    return chilkatJNI.CkXmlCertVault_AddPfx(swigCPtr, this, SWIGTYPE_p_CkPfx.getCPtr(pfx));
   }
 
   public boolean AddPfxBinary(CkByteData pfxBytes, String password) {

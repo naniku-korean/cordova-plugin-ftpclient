@@ -349,24 +349,24 @@ public class CkString {
     return chilkatJNI.CkString_saveToFile(swigCPtr, this, filename, charset);
   }
 
-  public CkStringArray split(char splitChar, boolean exceptDoubleQuoted, boolean exceptEscaped, boolean keepEmpty) {
+  public SWIGTYPE_p_CkStringArray split(char splitChar, boolean exceptDoubleQuoted, boolean exceptEscaped, boolean keepEmpty) {
     long cPtr = chilkatJNI.CkString_split(swigCPtr, this, splitChar, exceptDoubleQuoted, exceptEscaped, keepEmpty);
-    return (cPtr == 0) ? null : new CkStringArray(cPtr, true);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_CkStringArray(cPtr, true);
   }
 
-  public CkStringArray split2(String splitCharSet, boolean exceptDoubleQuoted, boolean exceptEscaped, boolean keepEmpty) {
+  public SWIGTYPE_p_CkStringArray split2(String splitCharSet, boolean exceptDoubleQuoted, boolean exceptEscaped, boolean keepEmpty) {
     long cPtr = chilkatJNI.CkString_split2(swigCPtr, this, splitCharSet, exceptDoubleQuoted, exceptEscaped, keepEmpty);
-    return (cPtr == 0) ? null : new CkStringArray(cPtr, true);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_CkStringArray(cPtr, true);
   }
 
-  public CkStringArray tokenize(String punctuation) {
+  public SWIGTYPE_p_CkStringArray tokenize(String punctuation) {
     long cPtr = chilkatJNI.CkString_tokenize(swigCPtr, this, punctuation);
-    return (cPtr == 0) ? null : new CkStringArray(cPtr, true);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_CkStringArray(cPtr, true);
   }
 
-  public CkStringArray splitAtWS() {
+  public SWIGTYPE_p_CkStringArray splitAtWS() {
     long cPtr = chilkatJNI.CkString_splitAtWS(swigCPtr, this);
-    return (cPtr == 0) ? null : new CkStringArray(cPtr, true);
+    return (cPtr == 0) ? null : new SWIGTYPE_p_CkStringArray(cPtr, true);
   }
 
   public boolean beginsWith(String sSubstr) {
