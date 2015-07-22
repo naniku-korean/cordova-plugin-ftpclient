@@ -12,8 +12,7 @@ extern CkoFtp2 *ftp;
 - (void) createRemoteDir:(CDVInvokedUrlCommand*)command;
 - (void) changeRemoteDir:(CDVInvokedUrlCommand*)command;
 - (void) deleteRemoteFile:(CDVInvokedUrlCommand*)command;
+- (void) getPathFromMediaUri:(CDVInvokedUrlCommand*)command;
 - (void) disconnect:(CDVInvokedUrlCommand*)command;
-
-- (void) greet:(CDVInvokedUrlCommand*)command;
 
 @end
