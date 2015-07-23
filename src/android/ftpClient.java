@@ -46,6 +46,9 @@ public class ftpClient extends CordovaPlugin {
             } else if (action.equals("disconnect")){
                 // FTP 서버 접속 연결 해제
                 disconnect();
+            } else if(action.equals("abort")){
+                // 파일 전송, 다운로드 정지
+                asyncAbort();
             } else if(action.equals("getPathFromMediaUri")){
                 // 실제 파일 경로 가져오기
                 getPathFromMediaUri(data.getString(0), callbackContext);
@@ -118,6 +121,10 @@ public class ftpClient extends CordovaPlugin {
         }
     }
 
+    public void asyncAbort(){
+        ftp.AsyncAbort();
+        Log.i(TAG, ftp.lastErrorText());
+    }
 
     public void disconnect() {
         ftp.Disconnect();
