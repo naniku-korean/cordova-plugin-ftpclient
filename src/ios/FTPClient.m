@@ -102,7 +102,7 @@ CkoFtp2 *ftp = nil;
             if ([ftp.AsyncBytesSent intValue] > 0 && fileSize == [ftp.AsyncBytesSent intValue]){
                 sendData = [NSString stringWithFormat: @"{\"value\":\"%@\", \"log\":\"%@\"}", ftp.AsyncSuccess?@"true":@"false", ftp.AsyncLog];
 
-                result = [CDVPluginResult resultWithStatus:CDVCommandStatus _ERROR messageAsString:[NSString stringWithFormat: @"%@", sendData]];
+                result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[NSString stringWithFormat: @"%@", sendData]];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 
                 [ftp Disconnect];
@@ -226,7 +226,7 @@ CkoFtp2 *ftp = nil;
         BOOL disconnected = [ftp Disconnect];
 
         if (disconnected) {
-            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"]];
+            result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"true"];
             [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
         } else {
             result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"false"];
