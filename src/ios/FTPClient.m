@@ -2,7 +2,7 @@
 
 CkoFtp2 *ftp = nil;
 
-@implementation ftpClient
+@implementation FTPClient
 
 - (void) keySetting:(CDVInvokedUrlCommand*)command
 {

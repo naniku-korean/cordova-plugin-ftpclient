@@ -1,7 +1,7 @@
 #import <Cordova/CDV.h>
 #import "include/CkoFtp2.h"
 
-@interface ftpClient : CDVPlugin
+@interface FTPClient : CDVPlugin
 
 extern CkoFtp2 *ftp;
 
