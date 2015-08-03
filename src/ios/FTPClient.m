@@ -8,7 +8,7 @@ CkoFtp2 *ftp = nil;
 {
     ftp = [[CkoFtp2 alloc] init];
     CDVPluginResult* result = nil;
-    
+
     NSString *key = [[command arguments] objectAtIndex:0];
 
     if (key == nil || [key isEqual:@"null"] || [key isEqual:@""]) {
@@ -100,7 +100,7 @@ CkoFtp2 *ftp = nil;
             sendData = [NSString stringWithFormat:@"{\"sendByte\":\"%d\", \"transferRate\":\"%d\"}",[ftp.AsyncBytesSent intValue], [ftp.UploadTransferRate intValue]];
 
             if ([ftp.AsyncBytesSent intValue] > 0 && fileSize == [ftp.AsyncBytesSent intValue]){
-                sendData = [NSString stringWithFormat: @"{\"value\":\"%@\", \"log\":\"%@\"}", ftp.AsyncSuccess?@"true":@"false", ftp.AsyncLog];
+                sendData = [NSString stringWithFormat: @"{\"value\":\"%@\"}", ftp.AsyncSuccess?@"true":@"false"];
 
                 result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[NSString stringWithFormat: @"%@", sendData]];
                 [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
@@ -119,15 +119,17 @@ CkoFtp2 *ftp = nil;
             }
         }
         if (ftp.AsyncSuccess == YES){
-            sendData = [NSString stringWithFormat: @"{\"value\":\"%@\", \"log\":\"%@\"}", ftp.AsyncSuccess?@"true":@"false", ftp.AsyncLog];
+            sendData = [NSString stringWithFormat: @"{\"value\":\"%@\"}", ftp.AsyncSuccess?@"true":@"false"];
             result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithFormat: @"%@", sendData]];
+            [result setKeepCallback:[NSNumber numberWithBool:YES]];
             [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 
             NSLog(@"%@", @"File Uploaded");
         } else {
-            sendData = [NSString stringWithFormat: @"{\"value\":\"%@\", \"log\":\"%@\"}", ftp.AsyncSuccess?@"true":@"false", ftp.AsyncLog];
+            sendData = [NSString stringWithFormat: @"{\"value\":\"%@\"}", ftp.AsyncSuccess?@"true":@"false"];
 
             result = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:[NSString stringWithFormat: @"%@", sendData]];
+            [result setKeepCallbackAsBool:YES];
             [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 
             NSLog(@"%@", ftp.AsyncLog);
